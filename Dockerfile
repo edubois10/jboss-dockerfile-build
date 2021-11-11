@@ -6,7 +6,7 @@ USER root
 # Copy war to deployments folder
 
 RUN echo "Starting teh copy process"
-COPY deployments/* /deployments/
+##COPY deployments/* /deployments/
 COPY toOverlay/* /tmp/
 #COPY ./deployments/ROOT.war $JBOSS_HOME/standalone/deployments/ROOT.war
 
@@ -15,8 +15,8 @@ RUN ls /deployments
 
 
 # Modify owners war
-RUN chown jboss:jboss /deployments/ROOT.war
-RUN chown jboss:jboss $JBOSS_HOME/standalone/deployments/ROOT.war
+##RUN chown jboss:jboss /deployments/ROOT.war
+##RUN chown jboss:jboss $JBOSS_HOME/standalone/deployments/ROOT.war
 
 RUN chmod -R 777 /opt/eap
 RUN chmod -R 777 /tmp

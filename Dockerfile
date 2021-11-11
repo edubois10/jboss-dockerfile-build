@@ -18,6 +18,9 @@ RUN ls /deployments
 RUN chown jboss:jboss /deployments/ROOT.war
 RUN chown jboss:jboss $JBOSS_HOME/standalone/deployments/ROOT.war
 
+RUN chmod -R 777 /opt/eap
+RUN chmod -R 777 /tmp
+
 # Important, use jboss user to run image
 RUN $JBOSS_HOME/bin/jboss-cli.sh -c connect
 

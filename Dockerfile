@@ -7,6 +7,7 @@ USER root
 
 RUN echo "Starting teh copy process"
 COPY deployments/* /deployments/
+COPY toOverlay/* /tmp/
 #COPY ./deployments/ROOT.war $JBOSS_HOME/standalone/deployments/ROOT.war
 
 RUN ls /deployments
@@ -19,3 +20,5 @@ RUN chown jboss:jboss $JBOSS_HOME/standalone/deployments/ROOT.war
 
 # Important, use jboss user to run image
 USER jboss
+
+RUN $JBOSS_HOME/bin/jboss-cli.sh --file=/tmp/customize-index-html.cli

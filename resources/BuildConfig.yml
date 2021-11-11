@@ -12,7 +12,7 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: 'weather-app-1:latest'
+      name: 'weather-bc:latest'
   resources: {}
   successfulBuildsHistoryLimit: 5
   failedBuildsHistoryLimit: 5

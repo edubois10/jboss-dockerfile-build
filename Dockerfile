@@ -18,12 +18,16 @@ COPY extentions/actions.cli /tmp/
 
 # Modify owners war
 RUN chown jboss:jboss /deployments/ROOT.war && \
+    chown jboss:jboss -R /opt/eap \
     chmod -R 777 /opt/eap && \
     chmod -R 777 /tmp
-##RUN chown jboss:jboss $JBOSS_HOME/standalone/deployments/ROOT.war
+
+RUN chown jboss:jboss $JBOSS_HOME/standalone/deployments/ROOT.war
 
 
 # Important, use jboss user to run image
+
+USER jboss
 RUN $JBOSS_HOME/bin/jboss-cli.sh --file=/tmp/actions.cli
 ##RUN $JBOSS_HOME/bin/jboss-cli.sh -c connect
 

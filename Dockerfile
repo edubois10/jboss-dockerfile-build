@@ -35,8 +35,6 @@ RUN $JBOSS_HOME/bin/jboss-cli.sh --file=/tmp/actions.cli
 
 RUN ls /tmp
 
-RUN rm /tmp/cli-script-*
-
 
 # The command is not available in the current context (e.g. required subsystems or connection to the 
 # controller might be unavailable).

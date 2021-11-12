@@ -18,8 +18,8 @@ COPY extentions/actions.cli /tmp/
 
 # Modify owners war
 RUN chown jboss:jboss /deployments/ROOT.war && \
-    chmod -R 775 /opt/eap && \
-    chmod -R 775 /tmp
+    chmod -R 777 /opt/eap && \
+    chmod -R 777 /tmp
 ##RUN chown jboss:jboss $JBOSS_HOME/standalone/deployments/ROOT.war
 
 

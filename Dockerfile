@@ -5,9 +5,11 @@ FROM registry.redhat.io/jboss-eap-7/eap73-openjdk11-openshift-rhel8@sha256:16a31
 USER root
 # Copy war to deployments folder
 
-RUN echo "Starting teh copy process"
-##COPY deployments/* /deployments/
+RUN echo "Starting the copy process"
+
+COPY deployments/* /deployments/
 COPY toOverlay/* /tmp/
+COPY extensions/actions.cli /tmp/
 #COPY ./deployments/ROOT.war $JBOSS_HOME/standalone/deployments/ROOT.war
 
 ##RUN ls /deployments
@@ -15,13 +17,14 @@ COPY toOverlay/* /tmp/
 
 
 # Modify owners war
-##RUN chown jboss:jboss /deployments/ROOT.war
+RUN chown jboss:jboss /deployments/ROOT.war && \
+    chmod -R 775 /opt/eap && \
+    chmod -R 775 /tmp
 ##RUN chown jboss:jboss $JBOSS_HOME/standalone/deployments/ROOT.war
 
-RUN chmod -R 777 /opt/eap
-RUN chmod -R 777 /tmp
 
 # Important, use jboss user to run image
+RUN $JBOSS_HOME/bin/jboss-cli.sh --file=/tmp/actions.cli}
 ##RUN $JBOSS_HOME/bin/jboss-cli.sh -c connect
 
 ##RUN $JBOSS_HOME/bin/jboss-cli.sh -c --file=/tmp/customize-index-html.cli

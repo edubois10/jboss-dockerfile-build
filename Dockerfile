@@ -10,7 +10,7 @@ RUN echo "Starting teh copy process"
 COPY toOverlay/* /tmp/
 #COPY ./deployments/ROOT.war $JBOSS_HOME/standalone/deployments/ROOT.war
 
-RUN ls /deployments
+##RUN ls /deployments
 # User root to modify war owners
 
 
@@ -22,9 +22,9 @@ RUN chmod -R 777 /opt/eap
 RUN chmod -R 777 /tmp
 
 # Important, use jboss user to run image
-RUN $JBOSS_HOME/bin/jboss-cli.sh -c connect
+##RUN $JBOSS_HOME/bin/jboss-cli.sh -c connect
 
-RUN $JBOSS_HOME/bin/jboss-cli.sh -c --file=/tmp/customize-index-html.cli
+##RUN $JBOSS_HOME/bin/jboss-cli.sh -c --file=/tmp/customize-index-html.cli
 
 
 # The command is not available in the current context (e.g. required subsystems or connection to the 

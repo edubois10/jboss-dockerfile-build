@@ -41,7 +41,7 @@ RUN ls /tmp
 # --file=/tmp/customize-index-html.cli": error while running runtime: exit status 1
 USER root
 RUN chown jboss:jboss /opt/eap/standalone/data/content && \
-    chmod -R 777 /opt/eap/standalone/data/content %% \
+    chmod -R 777 /opt/eap/standalone/data/content && \
     chown jboss:jboss -R /tmp && \
     chmod -R 777 /tmp
 

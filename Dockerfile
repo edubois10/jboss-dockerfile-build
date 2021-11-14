@@ -9,7 +9,7 @@ RUN echo "Starting the copy process"
 
 COPY deployments/* /deployments/
 COPY toOverlay/* /tmp/
-COPY extentions/actions.cli /tmp/
+#COPY extentions/actions.cli /tmp/
 #COPY ./deployments/ROOT.war $JBOSS_HOME/standalone/deployments/ROOT.war
 
 ##RUN ls /deployments

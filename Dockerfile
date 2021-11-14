@@ -27,10 +27,7 @@ RUN chown jboss:jboss $JBOSS_HOME/standalone/deployments/ROOT.war
 
 # Important, use jboss user to run image
 USER jboss
-RUN $JBOSS_HOME/bin/jboss-cli.sh --file=/tmp/actions.cli
-##RUN $JBOSS_HOME/bin/jboss-cli.sh -c connect
-
-#RUN $JBOSS_HOME/bin/jboss-cli.sh -c --file=/tmp/customize-index-html.cli
+##RUN $JBOSS_HOME/bin/jboss-cli.sh --file=/tmp/actions.cli
 
 RUN ls /tmp
 

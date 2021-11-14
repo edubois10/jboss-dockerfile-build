@@ -26,7 +26,7 @@ RUN chown jboss:jboss $JBOSS_HOME/standalone/deployments/ROOT.war
 
 
 # Important, use jboss user to run image
-USER jboss
+##USER jboss
 ##RUN $JBOSS_HOME/bin/jboss-cli.sh --file=/tmp/actions.cli
 
 RUN ls /tmp
@@ -37,9 +37,10 @@ RUN ls /tmp
 # error: build error: error building at STEP "RUN $JBOSS_HOME/bin/jboss-cli.sh 
 # --file=/tmp/customize-index-html.cli": error while running runtime: exit status 1
 USER root
-RUN chown jboss:jboss /opt/eap/standalone/data/content && \
-    chmod -R 777 /opt/eap/standalone/data/content && \
-    chown jboss:jboss -R /tmp && \
+
+##RUN chown jboss:jboss /opt/eap/standalone/data/content && \
+##    chmod -R 777 /opt/eap/standalone/data/content && \
+RUN chown jboss:jboss -R /tmp && \
     chmod -R 777 /tmp
 
 USER jboss

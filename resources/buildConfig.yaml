@@ -1,34 +1,35 @@
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
-  annotations:
-    openshift.io/generated-by: OpenShiftNewBuild
+  name: weather-app
   namespace: jboss-handson
-  name: weather-bc
   labels:
-    build: weather-bc
+    build: weather-app
 spec:
   nodeSelector: null
   output:
     to:
       kind: ImageStreamTag
-      name: 'weather-bc:latest'
+      name: 'weather-app:latest'
   resources: {}
   successfulBuildsHistoryLimit: 5
   failedBuildsHistoryLimit: 5
   strategy:
-    dockerStragety:
-      env: {}
+    type: Source
+    sourceStrategy:
       from:
         kind: ImageStreamTag
         namespace: openshift
         name: 'jboss-eap73-openjdk11-openshift:7.3'
-    type: Docker
+  postCommit: {}
   source:
-    git:
-      ref: "main"
-      uri: 'https://github.com/edubois10/jboss-dockerfile-build.git'
-#    sourceSecret: {}
-    type: Git
-  triggers: []
+    type: Binary
+    binary: {}
+  triggers:
+    - type: GitHub
+      github:
+        secret: qnBeRQUG-2GV-j7_8rlr
+    - type: Generic
+      generic:
+        secret: sPbq1JhQ1iyaEH93RmgQ
   runPolicy: Serial

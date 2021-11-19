@@ -1,0 +1,65 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: weather-app
+  namespace: jboss-handson
+  labels:
+    app: weather-app
+    app.kubernetes.io/component: weather-app
+    app.kubernetes.io/instance: weather-app
+    app.kubernetes.io/name: weather-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: weather-app
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        deployment: weather-app
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+    spec:
+      volumes:
+        - name: jboss-cli
+          configMap:
+            name: jboss-cli
+            defaultMode: 493
+        - name: index-html
+          configMap:
+            name: index-cm
+            defaultMode: 509
+      containers:
+        - name: weather-app
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/jboss-handson/weather-app@sha256:5457cf5d976ec8ae697a7d9b5191a86d2d21af7cc2c76710484934a4ba39450d
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8778
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: jboss-cli
+              mountPath: /opt/eap/extensions
+            - name: index-html
+              mountPath: /tmp/overlays/
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+

@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: weather-app
+  namespace: jboss-handson
+  labels:
+    app: weather-app
+    app.kubernetes.io/component: weather-app
+    app.kubernetes.io/instance: weather-app
+    app.kubernetes.io/name: weather-app
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: 8443-tcp
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+    - name: 8778-tcp
+      protocol: TCP
+      port: 8778
+      targetPort: 8778
+  selector:
+    deployment: weather-app
+  clusterIP: 172.30.255.36
+  clusterIPs:
+    - 172.30.255.36
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+
+  

@@ -1,6 +1,0 @@
-## index.html
-embed-server --std-out=echo --server-config=standalone-openshift.xml
-batch
-deployment-overlay add --name=index-overlay --content=index.html=/tmp/index.html --deployments=ROOT.war --redeploy-affected
-run-batch
-quit
